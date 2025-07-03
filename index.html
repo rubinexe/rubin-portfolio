@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rubin Bastakoti - Full Stack Developer</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poiret+One&family=Alegreya+Sans:wght@300;400;500;700&family=Handlee&family=PT+Sans:wght@400;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --secondary: #0f172a;
+      --light: #f8fafc;
+      --accent: #14b8a6;
+      --gray: #64748b;
+      --dark-gray: #1e293b;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'PT Sans', sans-serif;
+      background: 
+        radial-gradient(circle at 10% 20%, rgba(20, 184, 166, 0.05) 0%, rgba(20, 184, 166, 0) 20%),
+        linear-gradient(135deg, #0f172a, #1e293b);
+      color: var(--light);
+      line-height: 1.7;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Poiret One', cursive;
+      font-weight: 400;
+    }
+
+    .section-title h2,
+    .skills-container h3,
+    .work-content h3 {
+      font-family: 'Alegreya Sans', sans-serif;
+      font-weight: 500;
+    }
+
+    .hero-content h1, 
+    .hero-content h2,
+    .about-text h3,
+    .logo {
+      font-family: 'Handlee', cursive;
+    }
+
+    nav a,
+    p,
+    .about-text p,
+    .hero p,
+    .work-content p,
+    .btn {
+      font-family: 'Roboto', sans-serif;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      width: 100%;
+    }
+
+    header {
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(10px);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+      padding: 15px 0;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 1.8rem;
+      color: var(--light);
+      display: flex;
+      align-items: center;
+      letter-spacing: 1px;
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    .logo i {
+      margin-right: 10px;
+      color: var(--primary);
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+    }
+
+    .nav-links li {
+      margin-left: 30px;
+    }
+
+    .nav-links a {
+      color: var(--light);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      position: relative;
+      padding: 5px 0;
+      font-family: 'Alegreya Sans', sans-serif;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .mobile-menu {
+      display: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--light);
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero .container {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .hero-content {
+      max-width: 600px;
+      z-index: 2;
+      flex: 1;
+    }
+
+    .hero h1 {
+      font-size: 3.8rem;
+      margin-bottom: 20px;
+      line-height: 1.2;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .hero h1 span {
+      color: var(--accent);
+      display: block;
+      font-size: 2.8rem;
+      margin-top: 5px;
+    }
+
+    .hero h2 {
+      font-size: 2.2rem;
+      font-weight: 400;
+      color: var(--accent);
+      margin-bottom: 30px;
+      font-family: 'Alegreya Sans', sans-serif;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      margin-bottom: 40px;
+      max-width: 600px;
+      color: #cbd5e1;
+      font-weight: 300;
+    }
+
+    .btn {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      padding: 14px 35px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.1rem;
+      transition: all 0.4s ease;
+      border: none;
+      box-shadow: 0 4px 15px rgba(37, 99, 235, 0.5);
+      cursor: pointer;
+      font-family: 'Alegreya Sans', sans-serif;
+      letter-spacing: 0.5px;
+    }
+
+    .btn:hover {
+      background: linear-gradient(135deg, var(--accent), var(--primary));
+      transform: translateY(-4px);
+      box-shadow: 0 8px 25px rgba(20, 184, 166, 0.5);
+      color: white;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--primary);
+      color: var(--primary);
+      margin-left: 15px;
+    }
+
+    .btn-outline:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateY(-4px);
+      box-shadow: 0 8px 25px rgba(37, 99, 235, 0.5);
+    }
+
+    .hero-image {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-image-wrapper {
+      width: 340px;
+      height: 340px;
+      border-radius: 50%;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+      border: 6px solid rgba(20, 184, 166, 0.3);
+      transition: all 0.4s ease;
+      background: radial-gradient(circle, rgba(30,41,59,0.8) 30%, transparent 70%);
+    }
+
+    .hero-image-wrapper:hover {
+      transform: scale(1.05);
+      border-color: var(--accent);
+      box-shadow: 0 15px 40px rgba(20, 184, 166, 0.4);
+    }
+
+    .hero-image-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .hero-image-wrapper:hover img {
+      transform: scale(1.05);
+    }
+
+    .section {
+      padding: 100px 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 70px;
+      position: relative;
+    }
+
+    .section-title h2 {
+      font-size: 2.8rem;
+      font-weight: 500;
+      display: inline-block;
+      padding-bottom: 15px;
+      position: relative;
+      letter-spacing: 1px;
+    }
+
+    .section-title h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 4px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+
+    .about-content {
+      display: flex;
+      gap: 50px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+
+    .about-text {
+      flex: 1;
+    }
+
+    .about-text h3 {
+      font-size: 2.2rem;
+      margin-bottom: 25px;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .about-text p {
+      margin-bottom: 25px;
+      font-size: 1.15rem;
+      color: #cbd5e1;
+      line-height: 1.8;
+    }
+
+    /* FIXED SKILLS SECTION WITH VISIBLE ICONS */
+    .skills-container {
+      flex: 1;
+      background: rgba(30, 41, 59, 0.5);
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      backdrop-filter: blur(5px);
+    }
+
+    .skills-container h3 {
+      margin-bottom: 30px;
+      color: var(--accent);
+      font-size: 2rem;
+      text-align: center;
+    }
+
+    .skills-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .skills-list li {
+      position: relative;
+      padding: 15px 0 15px 60px;
+      margin-bottom: 15px;
+      font-size: 1.15rem;
+      color: var(--light);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .skills-list li:hover {
+      transform: translateX(5px);
+      color: var(--accent);
+    }
+
+    .skills-list li i {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      background: rgba(20, 184, 166, 0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: var(--accent);
+      transition: all 0.3s ease;
+    }
+
+    .skills-list li:hover i {
+      background: rgba(20, 184, 166, 0.3);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    /* WORK SECTION */
+    .work {
+      background: rgba(15, 23, 42, 0.7);
+      border-radius: 20px;
+      margin: 0 20px;
+      padding: 80px 0;
+    }
+
+    .work-content {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .work-content h3 {
+      font-size: 2.4rem;
+      margin-bottom: 20px;
+      font-family: 'Handlee', cursive;
+      font-weight: 400;
+      letter-spacing: 1px;
+    }
+
+    .work-content p {
+      font-size: 1.25rem;
+      margin-bottom: 40px;
+      color: var(--gray);
+      font-family: 'PT Sans', sans-serif;
+    }
+
+    /* IMPROVED SOCIAL ICONS */
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+      margin-top: 50px;
+    }
+
+    .contact-link {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--light);
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      position: relative;
+      width: 100px;
+    }
+
+    .contact-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      background: rgba(30, 41, 59, 0.7);
+      transition: all 0.3s ease;
+      border: 1px solid rgba(20, 184, 166, 0.3);
+    }
+
+    .contact-link:hover .contact-icon {
+      transform: translateY(-8px);
+      background: var(--accent);
+      color: var(--secondary);
+      box-shadow: 0 5px 15px rgba(20, 184, 166, 0.4);
+    }
+
+    .contact-name {
+      margin-top: 12px;
+      font-size: 0.95rem;
+      color: var(--accent);
+      opacity: 0.9;
+      transition: all 0.3s ease;
+      text-align: center;
+      font-family: 'Alegreya Sans', sans-serif;
+    }
+
+    .contact-link:hover .contact-name {
+      opacity: 1;
+      font-weight: 500;
+    }
+
+    footer {
+      background: var(--secondary);
+      padding: 30px 0;
+      text-align: center;
+      font-size: 1.1rem;
+      color: var(--gray);
+      font-family: 'Alegreya Sans', sans-serif;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .btn-container {
+      display: flex;
+      margin-top: 20px;
+    }
+    
+    /* Decorations */
+    .decoration {
+      position: absolute;
+      z-index: 0;
+      opacity: 0.1;
+      pointer-events: none;
+    }
+    
+    .triangle {
+      width: 0;
+      height: 0;
+      border-left: 100px solid transparent;
+      border-right: 100px solid transparent;
+      border-bottom: 200px solid var(--primary);
+      bottom: 10%;
+      left: 5%;
+      transform: rotate(30deg);
+    }
+    
+    .square {
+      width: 200px;
+      height: 200px;
+      border: 2px solid var(--accent);
+      top: 40%;
+      right: 10%;
+      transform: rotate(45deg);
+    }
+    
+    /* Background pattern */
+    .bg-pattern {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 80% 30%, rgba(37, 99, 235, 0.05) 0%, transparent 20%),
+        radial-gradient(circle at 20% 70%, rgba(20, 184, 166, 0.05) 0%, transparent 20%);
+      z-index: -1;
+      pointer-events: none;
+    }
+    
+    /* Mobile adjustments */
+    @media (max-width: 992px) {
+      .hero .container { 
+        flex-direction: column; 
+        text-align: center;
+      }
+      
+      .hero-content {
+        max-width: 100%;
+        padding-right: 0;
+        margin-top: 50px;
+      }
+      
+      .hero-image {
+        order: -1;
+        margin-bottom: 40px;
+      }
+      
+      .hero h1 {
+        font-size: 3.2rem;
+      }
+      
+      .hero h2 {
+        font-size: 1.8rem;
+      }
+      
+      .btn-container {
+        justify-content: center;
+      }
+      
+      .about-content {
+        flex-direction: column;
+      }
+      
+      .section-title h2 {
+        font-size: 2.4rem;
+      }
+      
+      .decoration {
+        display: none;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .mobile-menu { 
+        display: block; 
+      }
+      
+      .nav-links {
+        position: fixed;
+        top: 80px;
+        left: -100%;
+        flex-direction: column;
+        background: var(--secondary);
+        width: 100%;
+        height: calc(100vh - 80px);
+        padding-top: 40px;
+        transition: all 0.5s ease;
+      }
+      
+      .nav-links.active { 
+        left: 0; 
+      }
+      
+      .nav-links li { 
+        margin: 15px 0; 
+        text-align: center; 
+      }
+      
+      .hero h1 { 
+        font-size: 2.6rem; 
+      }
+      
+      .hero h2 { 
+        font-size: 1.6rem; 
+      }
+      
+      .hero p { 
+        font-size: 1.1rem; 
+      }
+      
+      .btn-container { 
+        flex-direction: column; 
+        gap: 15px;
+      }
+      
+      .btn-outline { 
+        margin-left: 0; 
+      }
+      
+      .hero-image-wrapper {
+        width: 280px;
+        height: 280px;
+      }
+      
+      .work {
+        margin: 0;
+      }
+      
+      .section-title h2 {
+        font-size: 2.2rem;
+      }
+      
+      .skills-container {
+        padding: 30px 20px;
+      }
+      
+      .skills-list li {
+        padding-left: 50px;
+        font-size: 1.1rem;
+      }
+      
+      .contact-links {
+        gap: 20px;
+      }
+      
+      .contact-link {
+        width: 80px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .hero h1 { 
+        font-size: 2.2rem; 
+      }
+      
+      .hero h2 { 
+        font-size: 1.4rem; 
+      }
+      
+      .hero-image-wrapper {
+        width: 240px;
+        height: 240px;
+      }
+      
+      .section-title h2 {
+        font-size: 2rem;
+      }
+      
+      .btn {
+        padding: 12px 25px;
+        font-size: 1rem;
+      }
+      
+      .skills-list li {
+        padding-left: 45px;
+        font-size: 1rem;
+      }
+      
+      .contact-links {
+        gap: 15px;
+      }
+      
+      .contact-link {
+        width: 70px;
+      }
+      
+      .contact-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.6rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Background pattern -->
+  <div class="bg-pattern"></div>
+  
+  <!-- Decorative elements -->
+  <div class="decoration triangle"></div>
+  <div class="decoration square"></div>
+
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo"><i class="fas fa-code"></i> Rubin<span>B</span></div>
+        <ul class="nav-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="mobile-menu"><i class="fas fa-bars"></i></div>
+      </nav>
+    </div>
+  </header>
+
+  <section id="home" class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Rubin Bastakoti<br><span>Full Stack Developer</span></h1>
+        <h2>Crafting digital experiences with code</h2>
+        <p>I'm a passionate full stack developer from Nepal with expertise in building robust web applications using modern technologies. I create solutions that are both beautiful and functional.</p>
+        <div class="btn-container">
+          <a href="#portfolio" class="btn">View My Work</a>
+          <a href="#contact" class="btn btn-outline">Get In Touch</a>
+        </div>
+      </div>
+      <div class="hero-image">
+        <div class="hero-image-wrapper">
+          <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#1e293b;color:#cbd5e1;font-size:1.2rem;text-align:center;">
+            <img src="rubin.png">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="section">
+    <div class="container">
+      <div class="section-title"><h2>About Me</h2></div>
+      <div class="about-content">
+        <div class="about-text">
+          <h3>Who am I?</h3>
+          <p>I'm Rubin Bastakoti, a full stack web developer based in Nepal. With over 10 years of experience, I specialize in creating dynamic, responsive, and user-friendly web applications.</p>
+          <p>I love solving problems and creating innovative solutions. I hold a Bachelor's in Computer Applications (BCA) and I'm currently pursuing my Master's in Computer Information Systems (MCIS).</p>
+          <p>I enjoy both frontend creativity and backend logic, and I'm always learning new technologies to deliver top-notch results.</p>
+        </div>
+        <div class="skills-container">
+          <h3>My Technical Skills</h3>
+          <ul class="skills-list">
+            <li><i class="fab fa-python"></i> Python</li>
+            <li><i class="fab fa-html5"></i> HTML5 & CSS3</li>
+            <li><i class="fab fa-js"></i> JavaScript</li>
+            <li><i class="fab fa-react"></i> React & Vue.js</li>
+            <li><i class="fab fa-node-js"></i> Node.js</li>
+            <li><i class="fas fa-database"></i> MongoDB</li>
+            <li><i class="fab fa-cuttlefish"></i> C/C++</li>
+            <li><i class="fas fa-server"></i> SQL Databases</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="portfolio" class="section work">
+    <div class="container">
+      <div class="section-title"><h2>My Work</h2></div>
+      <div class="work-content">
+        <h3>Want me to work for you?</h3>
+        <p>I deliver high-quality web solutions that combine functionality with elegant design. Whether you need a simple site or a complex app, I can bring your vision to life.</p>
+        <a href="#contact" class="btn">Get a Quote</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section">
+    <div class="container">
+      <div class="section-title"><h2>Get In Touch</h2></div>
+      <div class="contact-links">
+        <a href="mailto:rubin@example.com" class="contact-link">
+          <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+          <span class="contact-name">Email</span>
+        </a>
+        <a href="https://linkedin.com/in/rubin" target="_blank" class="contact-link">
+          <div class="contact-icon"><i class="fab fa-linkedin-in"></i></div>
+          <span class="contact-name">LinkedIn</span>
+        </a>
+        <a href="https://github.com/rubin" target="_blank" class="contact-link">
+          <div class="contact-icon"><i class="fab fa-github"></i></div>
+          <span class="contact-name">GitHub</span>
+        </a>
+        <a href="https://twitter.com/rubin" target="_blank" class="contact-link">
+          <div class="contact-icon"><i class="fab fa-twitter"></i></div>
+          <span class="contact-name">Twitter</span>
+        </a>
+        <a href="https://facebook.com/rubin" target="_blank" class="contact-link">
+          <div class="contact-icon"><i class="fab fa-facebook-f"></i></div>
+          <span class="contact-name">Facebook</span>
+        </a>
+        <a href="skype:rubin.bastakoti?call" class="contact-link">
+          <div class="contact-icon"><i class="fab fa-skype"></i></div>
+          <span class="contact-name">Skype</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2023 Rubin Bastakoti. All Rights Reserved.</p>
+      <p>Full Stack Web Developer</p>
+    </div>
+  </footer>
+
+  <script>
+    const mobileMenu = document.querySelector('.mobile-menu');
+    const navLinks = document.querySelector('.nav-links');
+    
+    mobileMenu.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+      mobileMenu.querySelector('i').classList.toggle('fa-bars');
+      mobileMenu.querySelector('i').classList.toggle('fa-times');
+    });
+    
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+        mobileMenu.querySelector('i').classList.add('fa-bars');
+        mobileMenu.querySelector('i').classList.remove('fa-times');
+      });
+    });
+    
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        window.scrollTo({ top: targetElement.offsetTop - 80, behavior: 'smooth' });
+      });
+    });
+    
+    // Add animation to skill items on scroll
+    const skillItems = document.querySelectorAll('.skills-list li');
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = "1";
+          entry.target.style.transform = "translateX(0)";
+        }
+      });
+    }, { threshold: 0.1 });
+    
+    skillItems.forEach(item => {
+      item.style.opacity = "0";
+      item.style.transform = "translateX(-20px)";
+      item.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+      observer.observe(item);
+    });
+  </script>
+</body>
+</html>
